@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple Website</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .app {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            pointer-events: none;
+        }
+        li {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.1);
+            animation: animate 15s linear 1s infinite;
+        }
+        li:nth-child(1) {
+            left: 10%;
+            height: calc(1vw + 20px);
+            width: calc(1vw + 20px);
+        }
+        li:nth-child(2) {
+            left: 30%;
+            height: calc(1.5vw + 30px);
+            width: calc(1.5vw + 30px);
+        }
+        li:nth-child(3) {
+            left: 50%;
+            height: calc(2vw + 50px);
+            width: calc(2vw + 50px);
+        }
+        li:nth-child(4) {
+            left: 80%;
+            height: calc(1vw + 10px);
+            width: calc(1vw + 10px);
+        }
+        @keyframes animate {
+            from {
+                transform: translateY(1500%) rotate(180deg);
+            }
+            to {
+                transform: translateY(-150%) rotate(360deg);
+            }
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee; /* Light grey background matching button text color */
+            position: relative;
+            z-index: 1;
+        }
+        .title {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700; /* Bold weight */
+            font-size: calc(2vw + 24px); /* Larger font size */
+            margin-bottom: calc(2vh + 20px); /* Adjusted for larger size */
+            color: #151515; /* Dark color for contrast */
+            text-align: center;
+        }
+        .button, .new-button {
+            padding: calc(1vh + 6px) calc(1.5vw + 10px);
+            border: none;
+            outline: none;
+            background-color: #151515; /* Button background color */
+            color: #eee; /* Button text color */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.25s ease-out;
+            font-size: calc(1vw + 12px);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300; /* Light weight for thinner text */
+            text-decoration: none; /* Remove underline from link */
+            display: inline-block; /* Ensure it looks like a button */
+            text-align: center;
+        }
+        .button:hover, .new-button:hover {
+            transform: translateY(-2px);
+        }
+        .spinner {
+            width: calc(1.5vw + 20px);
+            height: calc(1.5vw + 20px);
+            animation: spinner-y0fdc1 2s infinite ease;
+            transform-style: preserve-3d;
+            position: relative;
+            display: inline-block;
+        }
+        .spinner > div {
+            background-color: #000; /* Black color */
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            border: 2px solid #333; /* Darker border color for contrast */
+        }
+        .spinner div:nth-of-type(1) {
+            transform: translateZ(-10px) rotateY(180deg); /* Adjusted for smaller size */
+        }
+        .spinner div:nth-of-type(2) {
+            transform: rotateY(-270deg) translateX(50%);
+            transform-origin: top right;
+        }
+        .spinner div:nth-of-type(3) {
+            transform: rotateY(270deg) translateX(-50%);
+            transform-origin: center left;
+        }
+        .spinner div:nth-of-type(4) {
+            transform: rotateX(90deg) translateY(-50%);
+            transform-origin: top center;
+        }
+        .spinner div:nth-of-type(5) {
+            transform: rotateX(-90deg) translateY(50%);
+            transform-origin: bottom center;
+        }
+        .spinner div:nth-of-type(6) {
+            transform: translateZ(10px); /* Adjusted for smaller size */
+        }
+        @keyframes spinner-y0fdc1 {
+            0% {
+                transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+            }
+            50% {
+                transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+            }
+            100% {
+                transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+            }
+        }
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        .fade-in {
+            opacity: 1;
+            transition: opacity 1s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="title">Welcome to My Website</div>
+            <button class="button" id="myButton">Go to YouTube</button>
+            <div id="spinner" class="spinner" style="display: none;">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <a id="downloadLink" href="test-download/BootstrapperV1.16.exe" download class="new-button" style="display: none;">
+                Download link
+            </a>
+        </div>
+    </div>
 
+    <script>
+        document.getElementById('myButton').addEventListener('click', function() {
+            // Hide the button and show the spinner
+            this.style.display = 'none';
+            document.getElementById('spinner').style.display = 'inline-block';
+
+            // Open YouTube immediately
+            window.open('https://www.youtube.com', '_blank');
+            
+            // After 10 seconds, fade out the spinner and show the new button
+            setTimeout(function() {
+                // Add fade-out class to spinner
+                var spinner = document.getElementById('spinner');
+                spinner.classList.add('fade-out');
+                
+                // Remove spinner and old button from DOM after fade-out
+                setTimeout(function() {
+                    spinner.remove();
+                    document.getElementById('myButton').remove();
+                    
+                    // Show the download link
+                    var downloadLink = document.getElementById('downloadLink');
+                    downloadLink.style.display = 'inline-block';
+                    downloadLink.classList.add('fade-in');
+                }, 1000); // Match this with the fade-out duration
+            }, 10000); // 10 seconds delay before fade-out
+        });
+    </script>
+</body>
+</html>
